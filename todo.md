@@ -26,11 +26,11 @@
   - Add checkbox for each task
   - Toggle `completed` property on click
   - Apply strike-through style using Tailwind
-- [ ] Implement "Remove Task":
+- [x] Implement "Remove Task":
   - Add delete button for each task
   - Remove task from `tasks` array and DOM
-- [ ] Save `tasks` array to `localStorage` on any change
-- [ ] Load tasks from `localStorage` on page load
+- [x] Save `tasks` array to `localStorage` on any change
+- [x] Load tasks from `localStorage` on page load
 
 ---
 
@@ -65,7 +65,7 @@
 - [x] Animate progress bar on XP gain (`transition-all duration-300`)
 - [x] Add hover/focus effects to buttons
 - [x] Add visual cue for completed tasks (opacity or checkmark)
-- [ ] Add sound effect or animation for XP gain
+- [x] Add sound effect or animation for XP gain
 - [x] Test all features: Add, complete, delete tasks, level up
 - [ ] Deploy project (Netlify / GitHub Pages)
 

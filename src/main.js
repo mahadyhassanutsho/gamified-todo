@@ -1,4 +1,5 @@
 import "./style.css";
+import levelCompleteSound from "./asset/task-complete.wav";
 
 // DOM references
 const taskInput = document.getElementById("taskInput");
@@ -8,7 +9,10 @@ const xpEl = document.getElementById("xp");
 const levelEl = document.getElementById("level");
 const progressEl = document.getElementById("progress");
 
-// App state
+// Asset references
+const completionSound = new Audio(levelCompleteSound);
+
+// App states
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let xp = Number(localStorage.getItem("xp")) || 0;
 let level = Number(localStorage.getItem("level")) || 1;
@@ -63,6 +67,21 @@ function addAndRenderTask(task) {
     if (!task.completed) {
       task.completed = true;
       li.classList.add("line-through", "opacity-50");
+
+      completionSound.currentTime = 0;
+      completionSound.play();
+
+      xp += 10;
+      if (xp >= 100) {
+        level++;
+        xp -= 100;
+        alert("🎉 Level Up!");
+      }
+      updateProgress();
+    } else {
+      task.completed = false;
+      li.classList.remove("line-through", "opacity-50");
+
       xp += 10;
       if (xp >= 100) {
         level++;
@@ -76,7 +95,7 @@ function addAndRenderTask(task) {
   return li;
 }
 
-// Add task
+// Event listeners
 addTaskBtn.addEventListener("click", () => {
   const text = taskInput.value.trim();
   if (!text) return;
@@ -89,4 +108,8 @@ addTaskBtn.addEventListener("click", () => {
 
   taskInput.value = "";
   updateProgress();
+});
+
+completionSound.addEventListener("ended", () => {
+  completionSound.currentTime = 0;
 });
