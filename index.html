@@ -5,13 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamified To-Do</title>
     <link rel="shortcut icon" href="./public/vite.svg" type="image/x-icon" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="bg-gray-900 text-white">
-    <div id="app" class="min-h-screen flex flex-col items-center p-6">
-      <h1 class="text-3xl font-bold mb-4">🎯 Gamified To-Do</h1>
-      <p class="mb-6">
-        Level <span id="level">1</span> | XP: <span id="xp">0</span>/100
+    <div
+      id="app"
+      class="min-h-screen flex flex-col items-center p-6"
+      style="font-family: 'Cinzel', serif"
+    >
+      <h1
+        class="text-4xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 drop-shadow-lg"
+      >
+        Gamified To-Do
+      </h1>
+
+      <p class="mb-6 font-bold text-lg">
+        Level:
+        <span id="level" class="text-green-400">1</span>
+        | XP:
+        <span id="xp" class="text-green-400 animate-pulse duration-300 ease-out"
+          >0</span
+        >/100
       </p>
 
       <!-- Progress Bar -->

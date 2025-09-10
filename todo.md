@@ -67,7 +67,7 @@
 - [x] Add visual cue for completed tasks (opacity or checkmark)
 - [x] Add sound effect or animation for XP gain
 - [x] Test all features: Add, complete, delete tasks, level up
-- [ ] Deploy project (Netlify / GitHub Pages)
+- [x] Deploy project [Netlify](https://gamified-todo.netlify.app)
 
 ---
 

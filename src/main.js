@@ -81,14 +81,6 @@ function addAndRenderTask(task) {
     } else {
       task.completed = false;
       li.classList.remove("line-through", "opacity-50");
-
-      xp += 10;
-      if (xp >= 100) {
-        level++;
-        xp -= 100;
-        alert("🎉 Level Up!");
-      }
-      updateProgress();
     }
   });
 
