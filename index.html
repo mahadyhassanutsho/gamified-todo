@@ -2,12 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Gamified To-Do</title>
+    <link rel="shortcut icon" href="./public/vite.svg" type="image/x-icon" />
   </head>
-  <body>
-    <div id="app"></div>
+
+  <body class="bg-gray-900 text-white">
+    <div id="app" class="min-h-screen flex flex-col items-center p-6">
+      <h1 class="text-3xl font-bold mb-4">🎯 Gamified To-Do</h1>
+      <p class="mb-6">
+        Level <span id="level">1</span> | XP: <span id="xp">0</span>/100
+      </p>
+
+      <!-- Progress Bar -->
+      <div class="w-full max-w-md bg-gray-700 rounded-lg h-4 mb-6">
+        <div
+          id="progress"
+          class="bg-green-400 h-4 rounded-lg transition-all duration-300"
+          style="width: 0%"
+        ></div>
+      </div>
+
+      <!-- Task Input -->
+      <div class="flex gap-2 w-full max-w-md mb-4">
+        <input
+          id="taskInput"
+          type="text"
+          placeholder="New task..."
+          class="flex-1 px-3 py-2 rounded-md"
+        />
+        <button
+          id="addTask"
+          class="font-semibold bg-blue-500 hover:bg-transparent hover:text-blue-500 border border-blue-500 px-4 py-2 rounded-md cursor-pointer transition-colors duration-300"
+        >
+          Add
+        </button>
+      </div>
+
+      <!-- Task List -->
+      <ul id="taskList" class="w-full max-w-md space-y-2"></ul>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
