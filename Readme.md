@@ -7,13 +7,13 @@ Complete tasks, earn XP, level up, view history of your progress, and stay produ
 
 ## ✨ Features
 
-- ✅ Add, complete, and remove tasks  
+- ✅ Add, complete, uncomplete, and remove tasks  
 - 📦 Persistent data storage with `localStorage`  
 - ⚡ XP & Level system  
 - 📊 Animated progress bar  
-- 🕓 Task History (see what you added, completed, or deleted)  
+- 🕓 Task History (see what you added, completed, uncompleted, or deleted)  
 - 🎉 Level-up animations  
-- 📱 Responsive design with TailwindCSS  
+- 📱 Responsive design with TailwindCSS
 
 ---
 

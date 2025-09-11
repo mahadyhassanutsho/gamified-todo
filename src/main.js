@@ -16,6 +16,7 @@ const completionSound = new Audio(levelCompleteSound);
 const historyColors = {
   added: "text-green-400",
   completed: "text-blue-400",
+  uncompleted: "text-yellow-400",
   deleted: "text-red-400",
 };
 
@@ -61,9 +62,18 @@ function updateProgress() {
 function renderTask(task) {
   const li = document.createElement("li");
   li.className =
-    "flex justify-between items-center bg-gray-800 px-3 py-2 rounded-md cursor-pointer";
+    "flex justify-between items-center bg-gray-800 px-3 py-2 rounded-md";
   li.innerHTML = `
-    <span>${task.text}</span>
+    <div class="flex items-center gap-3">
+      <input type="checkbox" 
+      id="task-${task.id}"
+      class="w-5 h-5 rounded-full bg-white border border-gray-400 accent-green-500 cursor-pointer appearance-none checked:bg-green-500 checked:border-green-500"
+      />
+      <label for="task-${task.id}" 
+      class="${task.completed ? "line-through opacity-50" : ""} cursor-pointer">
+        ${task.text}
+      </label>
+    </div>
     <button class="font-semibold bg-red-500 hover:bg-red-600 px-2 py-1 rounded cursor-pointer transition-colors duration-300">
       <i class="fa-regular fa-trash-can"></i>
     </button>
@@ -74,7 +84,8 @@ function renderTask(task) {
   }
 
   const deleteBtn = li.querySelector("button");
-  deleteBtn.addEventListener("click", () => {
+  deleteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     tasks = tasks.filter((t) => t.id !== task.id);
     li.remove();
     pushAndRenderHistory({
@@ -85,7 +96,8 @@ function renderTask(task) {
     syncWithLocalStorage();
   });
 
-  li.addEventListener("click", () => {
+  const checkbox = li.querySelector("input");
+  checkbox.addEventListener("change", () => {
     if (!task.completed) {
       task.completed = true;
       li.classList.add("line-through", "opacity-50");
@@ -109,6 +121,11 @@ function renderTask(task) {
     } else {
       task.completed = false;
       li.classList.remove("line-through", "opacity-50");
+      pushAndRenderHistory({
+        action: "uncompleted",
+        time: new Date().toISOString(),
+        task: task,
+      });
       syncWithLocalStorage();
     }
   });

@@ -24,11 +24,11 @@
   - Push task object to `tasks` array
   - Render task in the task list dynamically
   - Log history entry (`added`)
-- [x] Implement "Mark as Complete":
+- [x] Implement "Mark as Complete / Uncomplete":
   - Add checkbox for each task
-  - Toggle `completed` property on click
+  - Toggle `completed` property on change
   - Apply strike-through style using Tailwind
-  - Log history entry (`completed`)
+  - Log history entry (`completed` when checked, `uncompleted` when unchecked)
 - [x] Implement "Remove Task":
   - Add delete button for each task
   - Remove task from `tasks` array and DOM
@@ -69,7 +69,7 @@
 
 - [x] Create `history` array in memory `{ action, task, time }`
 - [x] Persist `history` in `localStorage`
-- [x] Log events: `added`, `completed`, `deleted`
+- [x] Log events: `added`, `completed`, `uncompleted`, `deleted`
 - [x] Render last 10 entries in History accordion
 - [x] Use `prepend` to keep newest first
 - [x] Color-code entries:
