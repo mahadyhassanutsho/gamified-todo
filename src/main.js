@@ -49,7 +49,9 @@ function addAndRenderTask(task) {
     "flex justify-between items-center bg-gray-800 px-3 py-2 rounded-md cursor-pointer";
   li.innerHTML = `
     <span>${task.text}</span>
-    <button class="font-semibold bg-red-500 hover:bg-red-600 px-2 py-1 rounded cursor-pointer transition-colors duration-300">Delete</button>
+    <button class="font-semibold bg-red-500 hover:bg-red-600 px-2 py-1 rounded cursor-pointer transition-colors duration-300">
+      <i class="fa-regular fa-trash-can"></i>
+    </button>
   `;
 
   if (task.completed) {
