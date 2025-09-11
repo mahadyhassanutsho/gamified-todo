@@ -23,7 +23,7 @@
   <body class="bg-gray-900 text-white">
     <div
       id="app"
-      class="min-h-screen flex flex-col items-center p-6"
+      class="min-h-screen flex flex-col items-center p-10"
       style="font-family: 'Cinzel', serif"
     >
       <h1
@@ -69,6 +69,31 @@
 
       <!-- Task List -->
       <ul id="taskList" class="w-full max-w-md space-y-2"></ul>
+
+      <!-- History -->
+      <div class="w-full max-w-md mx-auto mt-5">
+        <div>
+          <button
+            id="history-toggler-btn"
+            class="flex justify-between w-full p-4 text-left font-medium text-white bg-gray-800 hover:bg-gray-700 transition-all duration-200 cursor-pointer"
+          >
+            <span>
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              History
+            </span>
+            <span
+              id="icon"
+              class="transition-transform duration-300 ease-in-out"
+              >&#x25BC;</span
+            >
+          </button>
+
+          <ul
+            id="history-list"
+            class="h-fit max-h-0 overflow-y-scroll opacity-0 -translate-y-10 transition-all duration-500 bg-gray-900 text-gray-300 border-b border-gray-700"
+          ></ul>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>

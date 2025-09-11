@@ -8,21 +8,35 @@ const taskList = document.getElementById("taskList");
 const xpEl = document.getElementById("xp");
 const levelEl = document.getElementById("level");
 const progressEl = document.getElementById("progress");
+const historyTogglerBtn = document.getElementById("history-toggler-btn");
+const historyList = document.getElementById("history-list");
 
 // Asset references
 const completionSound = new Audio(levelCompleteSound);
+const historyColors = {
+  added: "text-green-400",
+  completed: "text-blue-400",
+  deleted: "text-red-400",
+};
 
 // App states
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let xp = Number(localStorage.getItem("xp")) || 0;
 let level = Number(localStorage.getItem("level")) || 1;
+let history = JSON.parse(localStorage.getItem("history")) || [];
 
 // Initialization
 (function init() {
   tasks.forEach((task) => {
-    const li = addAndRenderTask(task);
+    const li = renderTask(task);
 
     taskList.appendChild(li);
+  });
+
+  history.forEach((entry) => {
+    const li = renderHistory(entry);
+
+    historyList.appendChild(li);
   });
 
   updateProgress();
@@ -33,6 +47,7 @@ function syncWithLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
   localStorage.setItem("xp", xp);
   localStorage.setItem("level", level);
+  localStorage.setItem("history", JSON.stringify(history));
 }
 
 function updateProgress() {
@@ -43,7 +58,7 @@ function updateProgress() {
   syncWithLocalStorage();
 }
 
-function addAndRenderTask(task) {
+function renderTask(task) {
   const li = document.createElement("li");
   li.className =
     "flex justify-between items-center bg-gray-800 px-3 py-2 rounded-md cursor-pointer";
@@ -62,6 +77,11 @@ function addAndRenderTask(task) {
   deleteBtn.addEventListener("click", () => {
     tasks = tasks.filter((t) => t.id !== task.id);
     li.remove();
+    pushAndRenderHistory({
+      action: "deleted",
+      time: new Date().toISOString(),
+      task: task,
+    });
     syncWithLocalStorage();
   });
 
@@ -80,13 +100,37 @@ function addAndRenderTask(task) {
         alert("🎉 Level Up!");
       }
       updateProgress();
+      pushAndRenderHistory({
+        action: "completed",
+        time: new Date().toISOString(),
+        task: task,
+      });
+      syncWithLocalStorage();
     } else {
       task.completed = false;
       li.classList.remove("line-through", "opacity-50");
+      syncWithLocalStorage();
     }
   });
 
   return li;
+}
+
+function renderHistory(history) {
+  const li = document.createElement("li");
+  li.className = `my-2 ${historyColors[history.action] || "text-gray-400"}`;
+  li.textContent = `
+      [${new Date(history.time).toLocaleTimeString()}] 
+      ${history.action.toUpperCase()}: ${history.task.text}
+  `;
+
+  return li;
+}
+
+function pushAndRenderHistory(entry) {
+  history.unshift(entry);
+  const li = renderHistory(entry);
+  historyList.prepend(li);
 }
 
 // Event listeners
@@ -95,13 +139,44 @@ addTaskBtn.addEventListener("click", () => {
   if (!text) return;
 
   const task = { id: Date.now(), text, completed: false };
-  tasks.push(task);
+  tasks.unshift(task);
+  pushAndRenderHistory({
+    action: "added",
+    time: new Date().toISOString(),
+    task: task,
+  });
 
-  const li = addAndRenderTask(task);
-  taskList.appendChild(li);
+  const li = renderTask(task);
+  taskList.prepend(li);
 
   taskInput.value = "";
   updateProgress();
+});
+
+historyTogglerBtn.addEventListener("click", () => {
+  const icon = historyTogglerBtn.querySelector("#icon");
+
+  if (historyList.classList.contains("max-h-0")) {
+    historyList.classList.remove("-translate-y-10");
+    historyList.classList.remove("opacity-0");
+    historyList.classList.remove("max-h-0");
+
+    historyList.classList.add("translate-y-0");
+    historyList.classList.add("opacity-100");
+    historyList.classList.add("max-h-96");
+
+    icon.classList.add("rotate-180");
+  } else {
+    historyList.classList.add("-translate-y-10");
+    historyList.classList.add("opacity-0");
+    historyList.classList.add("max-h-0");
+
+    historyList.classList.remove("translate-y-0");
+    historyList.classList.remove("opacity-100");
+    historyList.classList.remove("max-h-96");
+
+    icon.classList.remove("rotate-180");
+  }
 });
 
 completionSound.addEventListener("ended", () => {

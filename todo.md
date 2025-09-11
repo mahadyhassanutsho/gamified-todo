@@ -11,6 +11,7 @@
   - Task list container
   - Progress bar for XP
   - Level display
+  - History section (accordion style)
 
 ---
 
@@ -22,13 +23,16 @@
   - Generate unique ID (timestamp or counter)
   - Push task object to `tasks` array
   - Render task in the task list dynamically
+  - Log history entry (`added`)
 - [x] Implement "Mark as Complete":
   - Add checkbox for each task
   - Toggle `completed` property on click
   - Apply strike-through style using Tailwind
+  - Log history entry (`completed`)
 - [x] Implement "Remove Task":
   - Add delete button for each task
   - Remove task from `tasks` array and DOM
+  - Log history entry (`deleted`)
 - [x] Save `tasks` array to `localStorage` on any change
 - [x] Load tasks from `localStorage` on page load
 
@@ -57,22 +61,37 @@
   - Mobile: Single column
   - Desktop: Centered container
 - [x] Optional: Dark mode adjustments
+- [x] Add collapsible **History accordion** for logs
 
 ---
 
-## 5️⃣ Extras / Polish
+## 5️⃣ History System
+
+- [x] Create `history` array in memory `{ action, task, time }`
+- [x] Persist `history` in `localStorage`
+- [x] Log events: `added`, `completed`, `deleted`
+- [x] Render last 10 entries in History accordion
+- [x] Use `prepend` to keep newest first
+- [x] Color-code entries:
+  - Green for added
+  - Blue for completed
+  - Red for deleted
+
+---
+
+## 6️⃣ Extras / Polish
 
 - [x] Animate progress bar on XP gain (`transition-all duration-300`)
 - [x] Add hover/focus effects to buttons
 - [x] Add visual cue for completed tasks (opacity or checkmark)
 - [x] Add sound effect or animation for XP gain
-- [x] Test all features: Add, complete, delete tasks, level up
+- [x] Add sound effect on task completion
+- [x] Test all features: Add, complete, delete tasks, level up, view history
 - [x] Deploy project [Netlify](https://gamified-todo.netlify.app)
 
 ---
 
-## 6️⃣ References
+## 7️⃣ References
 
 - [TailwindCSS Docs](https://tailwindcss.com/docs)
-- [MDN LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-- Vanilla JS DOM manipulation guides
+- [MDN LocalStorage](https://developer.mozil)
