@@ -14,10 +14,10 @@ const historyList = document.getElementById("history-list");
 // Asset references
 const completionSound = new Audio(levelCompleteSound);
 const historyColors = {
-  added: "text-green-400",
-  completed: "text-blue-400",
-  uncompleted: "text-yellow-400",
-  deleted: "text-red-400",
+  added: "green-400",
+  completed: "blue-400",
+  uncompleted: "yellow-400",
+  deleted: "red-400",
 };
 
 // App states
@@ -135,11 +135,23 @@ function renderTask(task) {
 
 function renderHistory(history) {
   const li = document.createElement("li");
-  li.className = `my-2 ${historyColors[history.action] || "text-gray-400"}`;
-  li.textContent = `
-      [${new Date(history.time).toLocaleTimeString()}] 
-      ${history.action.toUpperCase()}: ${history.task.text}
-  `;
+  li.className = `
+  my-2.5 py-1 border-b 
+  border-${historyColors[history.action]} 
+  text-${historyColors[history.action]}
+`.trim();
+
+  li.innerHTML = `
+  <p class="font-semibold">
+    [${history.action.toUpperCase()}]
+  </p>
+  <p class="ml-2">
+    ${history.task.text}
+  </p>
+  <small class="block text-xs text-gray-500 mt-1">
+    at: ${new Date(history.time).toUTCString()}
+  </small>
+`;
 
   return li;
 }
