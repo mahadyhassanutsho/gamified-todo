@@ -14,10 +14,10 @@ const historyList = document.getElementById("history-list");
 // Asset references
 const completionSound = new Audio(levelCompleteSound);
 const historyColors = {
-  added: "green-400",
-  completed: "blue-400",
-  uncompleted: "yellow-400",
-  deleted: "red-400",
+  added: "text-green-400",
+  completed: "text-blue-400",
+  uncompleted: "text-yellow-400",
+  deleted: "text-red-400",
 };
 
 // App states
@@ -137,15 +137,14 @@ function renderHistory(history) {
   const li = document.createElement("li");
   li.className = `
   my-2.5 py-1 border-b 
-  border-${historyColors[history.action]} 
-  text-${historyColors[history.action]}
+  border-gray-400
 `.trim();
 
   li.innerHTML = `
-  <p class="font-semibold">
+  <p class="font-semibold ${historyColors[history.action]} ">
     [${history.action.toUpperCase()}]
   </p>
-  <p class="ml-2">
+  <p class="ml-2.5">
     ${history.task.text}
   </p>
   <small class="block text-xs text-gray-500 mt-1">
