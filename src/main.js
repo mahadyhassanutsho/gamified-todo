@@ -62,7 +62,7 @@ function updateProgress() {
 function renderTask(task) {
   const li = document.createElement("li");
   li.className =
-    "flex justify-between items-center bg-gray-800 px-3 py-2 rounded-md";
+    "flex justify-between items-center bg-gray-800 px-3 py-2 rounded-md font-merriweather";
   li.innerHTML = `
     <div class="flex items-center gap-3">
       <input type="checkbox" 
@@ -137,12 +137,13 @@ function renderHistory(history) {
   const li = document.createElement("li");
   li.className = `
   my-2.5 py-1 border-b 
-  border-gray-400
+  border-gray-400 
+  font-merriweather
 `.trim();
 
   li.innerHTML = `
-  <p class="font-semibold ${historyColors[history.action]} ">
-    [${history.action.toUpperCase()}]
+  <p class="font-bold ${historyColors[history.action]} ">
+    ${history.action.toUpperCase()}
   </p>
   <p class="ml-2.5">
     ${history.task.text}

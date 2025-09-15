@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+.font-cinzel {
+  font-family: "Cinzel", serif;
+}
+
+.font-merriweather {
+  font-family: "Merriweather", serif;
+}
+
 .custom-scrollbar {
   overflow-y: auto;
 }
