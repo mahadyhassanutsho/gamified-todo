@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamified To-Do</title>
-    <link rel="shortcut icon" href="./public/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <!-- Cinzel and Merriweather Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Merriweather:wght@400;700&display=swap"
@@ -71,13 +71,13 @@
 
       <!-- History -->
       <div class="w-full max-w-md mx-auto mt-5">
-        <div>
+        <div class="overflow-hidden rounded-lg border border-gray-700">
           <button
             id="history-toggler-btn"
             class="flex justify-between w-full p-4 text-left font-semibold text-white bg-gray-800 hover:bg-gray-700 transition-all duration-200 cursor-pointer"
           >
             <span>
-              <i class="fa-solid fa-clock-rotate-left"></i>
+              <i class="fa-solid fa-clock-rotate-left mr-1"></i>
               History
             </span>
             <span
@@ -87,10 +87,16 @@
             >
           </button>
 
-          <ul
-            id="history-list"
-            class="h-fit max-h-0 custom-scrollbar opacity-0 -translate-y-10 transition-all duration-500 bg-gray-900 text-gray-300 border-b border-gray-700"
-          ></ul>
+          <div
+            id="history-wrapper"
+            class="overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-in-out"
+            style="max-height: 0; opacity: 0; transform: translateY(-10px)"
+          >
+            <ul
+              id="history-list"
+              class="p-4 bg-gray-900 text-gray-300 custom-scrollbar border-t border-gray-700 space-y-2 max-h-[20rem] overflow-y-auto"
+            ></ul>
+          </div>
         </div>
       </div>
     </div>
